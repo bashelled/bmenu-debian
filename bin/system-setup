@@ -60,7 +60,7 @@ do
 			echo "$ZSH1MSG"
 			echo ""
 			echo ""
-			sudo pacman -Syu zsh zsh-completions command-not-found
+			sudo apt install zsh zsh-completions command-not-found
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -81,7 +81,7 @@ do
 			echo "$BASH1MSG"
 			echo ""
 			echo ""
-			sudo pacman -Syu bash bash-completion command-not-found
+			sudo pacman install bash bash-completion command-not-found
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -97,7 +97,7 @@ do
 			echo "$FISH1MSG"
 			echo ""
 			echo ""
-			sudo pacman -Syu fish command-not-found
+			sudo pacman install fish command-not-found
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -110,7 +110,7 @@ do
 			echo ""
 			echo ""
 			echo "$DASH1MSG"
-			sudo pacman -Syu dash
+			sudo apt install dash
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -147,10 +147,10 @@ do
 		slim)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy slim slim-themes && sudo systemctl enable slim.service -f
+			sudo apt install slim slim-themes && sudo systemctl enable slim.service -f
 			STATUSVAR=$?
 			else
-			sudo pacman -Sy slim slim-themes && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"slim\"/g" /etc/conf.d/xdm
+			sudo apt install slim slim-themes && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"slim\"/g" /etc/conf.d/xdm
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
