@@ -8,6 +8,7 @@ This repo has been forked to be used with Debian based systems. It is not verifi
 4. Auto installing is not known to work for now
 5. There is no found hardware manager, so s-tui, a hardware viewer has replaced hw-tui.
 6. File search has been removed
-7. AutoAPT may not work
+7. ~~AutoAPT may not work~~ Automatic installing is now working. (only tested on Debian 10 on Crostini)
+
 
 More updates soon
