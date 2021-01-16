@@ -24,6 +24,7 @@ ZSH3MSG="you might also like zsh-history-substring search or zsh-syntax-highligh
 BASH1MSG="Bourne again shell. Standard for most linux systems. Respectable choice for any use. Jack of all trades, master of none."
 FISH1MSG="Friendly interactive shell. Bad for scripting, great for interactive use without much configuration required."
 DASH1MSG="Debian almquist shell. Super light and feature free. Great for scripting and fast startup, entirely unsuitable for interactive use."
+XONSH1MSG="A Python-powered, cross-platform, Unix-gazing shell language and command prompt. Best for scripting, 50/50 for interactive use."
 PS3DISPLAYMNGMSG="Which displaymanager do you wish to install and use as default? "
 PS3DISKUTILSMSG="Select tool to use? "
 HIBERNATIONSETUPMSG="Enable delayed hibernation service? (y/n)"
@@ -50,7 +51,7 @@ echo "$AVAILABLESHELLMSG$CURRENTPREFIXMSG$CURRENTSHELLMSG$CURRENTSUFFIXMSG"
 PS3="$PS3SHELLCHOOSMSG"
 SELECTEDITEM=""
 # Gather the results in an array.
-shells=("zsh" "bash" "fish" "dash" "cancel")
+shells=("zsh" "bash" "fish" "dash" "xonsh" "cancel")
 
 select pick in "${shells[@]}"
 do
@@ -81,7 +82,7 @@ do
 			echo "$BASH1MSG"
 			echo ""
 			echo ""
-			sudo pacman install bash bash-completion command-not-found
+			sudo apt install bash bash-completion command-not-found
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -97,7 +98,7 @@ do
 			echo "$FISH1MSG"
 			echo ""
 			echo ""
-			sudo pacman install fish command-not-found
+			sudo apt install fish command-not-found
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -118,7 +119,20 @@ do
 			chsh -s /usr/dash
 			SELECTEDITEM="$pick"
 			break
-			;;		
+			;;
+	        xonsh)
+		        echo ""
+			echo ""
+			echo "$XONSH1MSG"
+			sudo apt install xonsh
+			STATUSVAR=$?
+			if [ $STATUSVAR -eq 1 ]; then
+			        return $STATUSVAR
+			fi
+			chsh -s /usr/bin/xonsh
+			SELECTEDITEM="$pick"
+			break
+			;;
 		cancel)
 			break
 	esac
@@ -134,7 +148,7 @@ fi
 PS3="$PS3DISPLAYMNGMSG"
 SELECTEDITEM=""
 # Gather the results in an array.
-dms=("lightdm" "kdm" "gdm" "lxdm" "mdm" "slim" "sddm" "cancel")
+dms=("lightdm" "gdm" "lxdm" "mdm" "slim" "sddm" "cancel")
 sudo echo ""
 STATUSVAR=$?
 if [ $STATUSVAR -eq 1 ]; then
@@ -147,10 +161,10 @@ do
 		slim)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo apt install slim slim-themes && sudo systemctl enable slim.service -f
+			sudo apt install slim && sudo systemctl enable slim.service -f
 			STATUSVAR=$?
 			else
-			sudo apt install slim slim-themes && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"slim\"/g" /etc/conf.d/xdm
+			sudo apt install slim && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"slim\"/g" /etc/conf.d/xdm
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -163,12 +177,12 @@ do
 		lightdm)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy lightdm lightdm-another-gtk-greeter lightdm-another-gtk-greeter-themes accountsservice \
+			sudo apt install lightdm lightdm-another-gtk-greeter lightdm-another-gtk-greeter-themes accountsservice \
 			&& sudo systemctl enable lightdm.service -f && sudo systemctl enable accounts-daemon && \
 			sudo $TEXTEDITOR /etc/lightdm/lightdm.conf
 			STATUSVAR=$?
 			else
-			sudo pacman -Sy lightdm lightdm-another-gtk-greeter lightdm-another-gtk-greeter-themes accountsservice \
+			sudo apt install lightdm lightdm-another-gtk-greeter lightdm-another-gtk-greeter-themes accountsservice \
 			&& sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"lightdm\"/g" /etc/conf.d/xdm && \
 			sudo $TEXTEDITOR /etc/lightdm/lightdm.conf
 			STATUSVAR=$?
@@ -183,13 +197,13 @@ do
 		sddm)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy sddm && sudo systemctl enable sddm.service -f
+			sudo apt install sddm && sudo systemctl enable sddm.service -f
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
 			fi
 			else
-			sudo pacman -Sy sddm && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"sddm\"/g" /etc/conf.d/xdm
+			sudo apt install sddm && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"sddm\"/g" /etc/conf.d/xdm
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -202,10 +216,10 @@ do
 		mdm)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy mdm && sudo systemctl enable mdm.service -f
+			sudo apt install mdm && sudo systemctl enable mdm.service -f
 			STATUSVAR=$?
 			else
-			sudo pacman -Sy mdm-nosystemd && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"mdm\"/g" /etc/conf.d/xdm
+			sudo apt install mdm && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"mdm\"/g" /etc/conf.d/xdm
 			STATUSVAR=$?
 			if [ $STATUSVAR -eq 1 ]; then
 				return $STATUSVAR
@@ -218,10 +232,10 @@ do
 		lxdm)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy lxdm && sudo systemctl enable lxdm.service -f
+			sudo apt install lxdm && sudo systemctl enable lxdm.service -f
 			STATUSVAR=$?
 			else
-			sudo pacman -Sy lxdm-consolekit && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"lxdm\"/g" /etc/conf.d/xdm
+			sudo apt install lxdm && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"lxdm\"/g" /etc/conf.d/xdm
 			STATUSVAR=$?
 			fi
 			break
@@ -229,30 +243,14 @@ do
 		gdm)
 			SELECTEDITEM="$pick"
 			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy gdm3setup && sudo systemctl enable gdm.service -f
+			sudo apt install gdm3 && sudo systemctl enable gdm.service -f
 			STATUSVAR=$?
 			else
 			echo "$GDMWONTWORKMSG"
 			read -s n1
 			fi
 			break
-			;;		
-		kdm)
-			SELECTEDITEM="$pick"
-			if ! [[ -d /run/openrc ]] ; then
-			sudo pacman -Sy kdebase-workspace archlinux-themes-kdm && sudo systemctl enable kdm.service -f
-			STATUSVAR=$?
-			else
-			sudo pacman -Sy kdebase-workspace-consolekit archlinux-themes-kdm && sudo sed -i "s/$(grep "DISPLAYMANAGER=" /etc/conf.d/xdm)/DISPLAYMANAGER=\"kdm\"/g" /etc/conf.d/xdm
-			STATUSVAR=$?
-			if [ $STATUSVAR -eq 1 ]; then
-				return $STATUSVAR
-			fi
-			sudo rc-update add xdm default
-			STATUSVAR=$?
-			fi 
-			break
-			;;		
+			;;
 		cancel)
 			STATUSVAR=1
 			break
@@ -309,7 +307,7 @@ function hibernation_setup {
 	read -s -n1 choix
     case $choix in
 	    y|Y)
-    	sudo pacman -Syu delayed-hibernation
+    	sudo apt install delayed-hibernation
     	STATUSVAR=$?
     	break
     	;;
