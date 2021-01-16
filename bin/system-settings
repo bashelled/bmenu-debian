@@ -39,7 +39,7 @@ do
 			break
 			;;		
 		systemdboot)
-			sudo $TEXTEDITOR /boot/loader/entries/manjaro.conf
+			sudo $TEXTEDITOR /boot/loader/entries/ubuntu.conf
 			break
 			;;		
 		syslinux)
@@ -71,7 +71,7 @@ function main {
     echo ""
     echo -e "                          ::Settings:: "
     echo -e " ┌─────────────────────────────────────────────────────────────┐"
-    echo -e " │    1   Pacman settings              2   Mkinitcpio          │"
+    echo -e " │    1   APT source settings          2   Update Initram      │"
     echo -e " │    3   Fstab                        4   Sudoers             │"
     echo -e " │    5   Logind                       6   Bootloader          │"    
     echo -e " │    7   Udevil settings              8   Xinitrc             │"
@@ -83,12 +83,12 @@ function main {
     case $choix in
         1)
             echo
-            sudo $TEXTEDITOR /etc/pacman.conf
+            sudo $TEXTEDITOR /etc/apt/sources.list
             echo ""
             ;;
         2)
             echo
-            sudo $TEXTEDITOR /etc/mkinitcpio.conf
+            sudo update-initramfs
             echo ""
             ;;
         3)
