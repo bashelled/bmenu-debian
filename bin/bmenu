@@ -5,6 +5,7 @@ BLUE='\e[44m'
 ORANGE='\e[46m'
 NC='\e[0m'
 
+
 # Service messages section
 ERRORMSG="$RED Wrong.$NC"
 TRYAGAINMSG="$RED Press any key and try again$NC"
@@ -111,7 +112,8 @@ function main {
     echo -e " │    7   Sound                        8   Configuration       │"
     echo -e " │    9   Time and date                T   Taskmanager         │"
     echo -e " │    F   File Manager                 B   Browser             │"
-    echo -e " │    S   Search                       I   Init-system         │"
+    echo -e " │    I   Init-system                  U   Update              │"
+    echo -e " │    A   About                                                │"
     echo -e " └─────────────────────────────────────────────────────────────┘"
     echo -e "          Select an item       -       0   Exit "
     echo ""
@@ -134,7 +136,7 @@ function main {
             ;;
         4)
             echo
-            appearance-menu
+            ./$MY_PATH/appearance-menu
             echo ""
             ;;
         5)
@@ -182,16 +184,23 @@ function main {
             cli_browser
             echo ""
             ;;
-        s|S)
-            echo
-            file_finder
-            echo ""
-            ;;
         i|I)
             echo
             init_settings
             echo ""
             ;;
+        u|U)
+            echo
+	    git pull origin master
+	    echo -e "$ORANGE Updated, press a key to continue.$NC"
+	    read -s -n1
+	       clear
+        a|A)
+	    echo
+	    echo "bmenu for debian"
+	    read -s -n1
+	        clear
+          
         0)
             clear && exit
             ;;
