@@ -1,6 +1,6 @@
 Bash based system menu for ~~arch linux/manjaro~~ ubuntu/debian
 
-This repo has been forked to be used with Debian based systems. It is not verified that bmenu for debian will be supported for all systems. Here are a list of changes:
+**This repo has been forked to be used with Debian based systems. It is not verified that bmenu for debian will be supported for all systems.** Here are a list of changes:
 
 1. PacUI has been replaced with Aptitude
 2. There is no found time manager, so Calcurse, a calendar has replased Timeset.
@@ -12,4 +12,10 @@ This repo has been forked to be used with Debian based systems. It is not verifi
 8. Devices without SystemD may not work with the network manager.
 
 
-More updates soon
+*More updates may come soon*
+
+To install:
+
+```
+not finished yet, for now you will have to clone manually and run (cloned dir)/bin/bmenu
+```
