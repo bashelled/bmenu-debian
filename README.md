@@ -14,8 +14,4 @@ Bash based system menu for ~~arch linux/manjaro~~ ubuntu/debian
 
 *More updates may come soon*
 
-To install:
-
-```
-not finished yet, for now you will have to clone manually and run (cloned dir)/bin/bmenu
-```
+To install, ```git clone``` the repo, ```cd bin```, and run ```bmenu```.
