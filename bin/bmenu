@@ -112,8 +112,8 @@ function main {
     echo -e " │    7   Sound                        8   Configuration       │"
     echo -e " │    9   Time and date                T   Taskmanager         │"
     echo -e " │    F   File Manager                 B   Browser             │"
-    echo -e " │    I   Init-system                  U   Update              │"
-    echo -e " │    A   About                                                │"
+    echo -e " │    I   Init-system                                          │"
+    echo -e " │                                                             │"
     echo -e " └─────────────────────────────────────────────────────────────┘"
     echo -e "          Select an item       -       0   Exit "
     echo ""
@@ -189,18 +189,6 @@ function main {
             init_settings
             echo ""
             ;;
-        u|U)
-            echo
-	    git pull origin master
-	    echo -e "$ORANGE Updated, press a key to continue.$NC"
-	    read -s -n1
-	       clear
-        a|A)
-	    echo
-	    echo "bmenu for debian"
-	    read -s -n1
-	        clear
-          
         0)
             clear && exit
             ;;
