@@ -43,7 +43,7 @@ function file_finder {
 		rifle $(find -type f | fzf -e --reverse)
 	else
 		echo "$INSTALLINGRNG2MSG"
-			sudo apt install ranger && rifle $(find -type f | fzf -e --reverse)
+			sudo apt install ranger fzf && rifle $(find -type f | fzf -e --reverse)
 	fi
 }
 
