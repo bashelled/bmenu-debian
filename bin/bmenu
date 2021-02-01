@@ -190,6 +190,11 @@ function main {
             init_settings
             echo ""
             ;;
+	s|S)
+	    echo
+	    file_finder
+	    echo ""
+	    ;;
         0)
             clear && exit
             ;;
