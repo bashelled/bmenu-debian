@@ -1,4 +1,5 @@
 #!/bin/bash
+# Search needs fzf to work
 
 RED='\e[41m'
 BLUE='\e[44m'
@@ -112,7 +113,7 @@ function main {
     echo -e " │    7   Sound                        8   Configuration       │"
     echo -e " │    9   Time and date                T   Taskmanager         │"
     echo -e " │    F   File Manager                 B   Browser             │"
-    echo -e " │    I   Init-system                                          │"
+    echo -e " │    I   Init-system                  S   Search              │"
     echo -e " │                                                             │"
     echo -e " └─────────────────────────────────────────────────────────────┘"
     echo -e "          Select an item       -       0   Exit "
