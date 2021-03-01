@@ -7,10 +7,8 @@ Bash based system menu for ~~arch linux/manjaro~~ ubuntu/debian
 3. lynx is now the only cli browser, all other ones are not able to work
 4. Auto installing is not known to work for now
 5. There is no found (tui) hardware manager, so s-tui, a hardware viewer has replaced hw-tui.
-6. ~~File search has been removed~~ File search will be readded as of Jan 2020.
-7. ~~AutoAPT may not work~~ Automatic installing is now working. (only tested on Debian 10 on Crostini)
-8. Devices without SystemD may not work with the network manager.
-
+6. Devices without SystemD may not work with the network manager.
+7. For file search, if you already have rifle, you mist install fzf.
 
 *More updates may come soon*
 
